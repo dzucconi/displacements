@@ -12,17 +12,16 @@ window.requestAnimFrame = (function() {
     var $video = $("#video");
 
     $video.on("play", function() {
-      var i = 0;
+      var i = 0, val;
 
-      (function animloop() {
-        requestAnimFrame(animloop);
+      (function run() {
+        if (i % 2 === 0) { val = -1; } else { val = 1 };
 
-        var val = -1;
-        if (i % 2 === 0) { val = Math.abs(val) };
-
-        $video.css({"-webkit-transform": "scaleX(" + val + ")", "transform": "scaleX(" + val + ")"});
+        $video.css({ "-webkit-transform": "scaleX(" + val + ")", "transform": "scaleX(" + val + ")" });
 
         i++;
+
+        requestAnimFrame(run);
       }());
     });
   });
